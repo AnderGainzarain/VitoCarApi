@@ -31,6 +31,7 @@ public class Viaje {
 	private String origen;
 	private String destino;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	
 	private LocalDateTime fechaSalida;
 
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
@@ -47,63 +48,105 @@ public class Viaje {
 	private List<User> usuarios2;
 
 	
-	// create the getters and setters	
+	
+
 	public int getIdViaje() {
 		return idViaje;
 	}
+
+
+
 
 	public void setIdViaje(int idViaje) {
 		this.idViaje = idViaje;
 	}
 
+
+
+
 	public int getPrecio() {
 		return precio;
 	}
+
+
+
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
 
+
+
+
 	public String getOrigen() {
 		return origen;
 	}
+
+
+
 
 	public void setOrigen(String origen) {
 		this.origen = origen;
 	}
 
+
+
+
 	public String getDestino() {
 		return destino;
 	}
+
+
+
 
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
 
-	public User getConductor() {
-		return conductor;
-	}
 
-	public void setConductor(User user) {
-		this.conductor = user;
-	}
-	
-	
+
+
 	public LocalDateTime getFechaSalida() {
 		return fechaSalida;
 	}
+
+
+
 
 	public void setFechaSalida(LocalDateTime fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 
+
+
+
+	public User getConductor() {
+		return conductor;
+	}
+
+
+
+
+	public void setConductor(User conductor) {
+		this.conductor = conductor;
+	}
+
+
+
+
 	public List<User> getUsuarios2() {
 		return usuarios2;
 	}
 
+
+
+
 	public void setUsuarios2(List<User> usuarios2) {
 		this.usuarios2 = usuarios2;
 	}
+
+
+
 
 	public Viaje() {
 		super();
