@@ -39,7 +39,7 @@ public class ViajeControlador {
 			return new ResponseEntity<>(viajeRepositorio.findAll(),HttpStatus.OK);
 	}
 	
-	// Returns the viaje with the matching id
+	// Deletes the viaje with the matching id
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminarViaje(@PathVariable Integer id){
 		viajeRepositorio.deleteById(id);
@@ -85,5 +85,9 @@ public class ViajeControlador {
 		return ResponseEntity.created(location).body(viajeGuardado);
 	}
 	// anular reserva
-	
+	@DeleteMapping("/anular/{id}")
+	public ResponseEntity<Void> eliminarReserva(@PathVariable Integer id){
+		viajeRepositorio.deletePasajero(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 }

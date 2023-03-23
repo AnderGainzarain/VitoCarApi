@@ -27,4 +27,5 @@ public interface ViajeRepositorio extends CrudRepository<Viaje,Integer> {
 		@Transactional
 		@Query("SELECT p FROM Viaje p WHERE p.fechaSalida>=:fecha AND p.origen=:origen AND p.destino=:destino")
 		List<Viaje> findViaje(@Param(value = "origen") String origen, @Param(value = "destino") String destino, @Param(value="fecha") LocalDateTime fecha);		
+		void deletePasajero(int dni);
 }
