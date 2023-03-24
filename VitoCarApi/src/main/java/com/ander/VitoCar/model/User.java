@@ -136,13 +136,14 @@ public class User {
 	public void setViajes2(List<Viaje> viajes2) {
 		this.viajes2 = viajes2;
 	}
-/*
+
 	public void anularReserva(Integer idViaje) {
-			foreach(Viaje viaje: viajes2){
-				
+		for (int i=0; i<= viajes2.size();i++) {
+			if (viajes2.get(i).getIdViaje()==idViaje) {
+				viajes2.remove(i);
 			}
-	}*/
-	
+		}
+	}	
 	public User() {
 		super();
 	}
