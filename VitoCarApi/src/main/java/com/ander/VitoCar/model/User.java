@@ -136,8 +136,13 @@ public class User {
 	public void setViajes2(List<Viaje> viajes2) {
 		this.viajes2 = viajes2;
 	}
-
-
+/*
+	public void anularReserva(Integer idViaje) {
+			foreach(Viaje viaje: viajes2){
+				
+			}
+	}*/
+	
 	public User() {
 		super();
 	}

@@ -84,10 +84,13 @@ public class ViajeControlador {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(viaje.getIdViaje()).toUri();
 		return ResponseEntity.created(location).body(viajeGuardado);
 	}
-	// anular reserva
-	@DeleteMapping("/anular/{id}")
-	public ResponseEntity<Void> eliminarReserva(@PathVariable Integer id){
-		viajeRepositorio.deletePasajero(id);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
+	/*@DeleteMapping("anular")
+	public ResponseEntity<Void> anularReserva(@PathVariable Integer dni, @PathVariable Integer idViaje){
+		Optional<User> usuarioOpcional = userRepositorio.findById(dni);
+		if (!usuarioOpcional.isPresent()) {
+			return ResponseEntity.unprocessableEntity().build();
+		}
+		User usuario = usuarioOpcional.get();
+		
+	}*/
 }
