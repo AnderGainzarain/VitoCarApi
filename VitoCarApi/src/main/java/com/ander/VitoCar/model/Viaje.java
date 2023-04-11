@@ -148,7 +148,13 @@ public class Viaje {
 	}
 
 
-
+	public void anularReserva(Integer dni) {
+		for (int i=0; i < usuarios2.size();i++) {
+			if (usuarios2.get(i).getDNI()==dni) {
+				usuarios2.remove(i);
+			}
+		}
+	}
 
 	public Viaje() {
 		super();

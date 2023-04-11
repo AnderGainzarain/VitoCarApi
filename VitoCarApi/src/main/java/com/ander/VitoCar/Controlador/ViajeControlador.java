@@ -87,11 +87,14 @@ public class ViajeControlador {
 	@DeleteMapping("/anular")
 	public ResponseEntity<Void> anularReserva(@RequestParam (name="dni") Integer dni, @RequestParam (name="idViaje") Integer idViaje){
 		Optional<User> usuarioOpcional = userRepositorio.findById(dni);
-		if (!usuarioOpcional.isPresent()) {
+		Optional<Viaje> viajeOpcional = viajeRepositorio.findById(idViaje);
+		if (!usuarioOpcional.isPresent() || !(viajeOpcional.isPresent())) {
 			return ResponseEntity.unprocessableEntity().build();
 		}
 		User usuario = usuarioOpcional.get();
 		usuario.anularReserva(idViaje);
+		Viaje viaje = viajeOpcional.get();
+		viaje.anularReserva(dni);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 }

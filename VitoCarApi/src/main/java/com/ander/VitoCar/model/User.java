@@ -138,7 +138,7 @@ public class User {
 	}
 
 	public void anularReserva(Integer idViaje) {
-		for (int i=0; i<= viajes2.size();i++) {
+		for (int i=0; i < viajes2.size();i++) {
 			if (viajes2.get(i).getIdViaje()==idViaje) {
 				viajes2.remove(i);
 			}

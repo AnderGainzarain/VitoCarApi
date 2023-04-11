@@ -30,7 +30,7 @@ public class UserControlador {
 				return new ResponseEntity<>(userRepositorio.findAll(),HttpStatus.OK);
 		}
 		
-		@GetMapping("/v2/{dni}")
+		@GetMapping("/{dni}")
 		public ResponseEntity<Object> obtenerUser(@PathVariable int dni){
 			Optional<User> usuarioOpcional = userRepositorio.findById(dni);
 			if(!usuarioOpcional.isPresent()) {
