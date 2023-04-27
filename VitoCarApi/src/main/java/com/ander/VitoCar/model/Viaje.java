@@ -47,6 +47,9 @@ public class Viaje {
 	
 	private List<User> usuarios2;
 
+	public void realizarReserva(User pasajero) {
+		usuarios2.add(pasajero);
+	}
 	
 	public void deletePasajero(int dni) {
 		usuarios2.removeIf(usuario -> usuario.getDNI()==dni);

@@ -37,6 +37,9 @@ public class User {
 	
 	private List<Viaje> viajes2;
 	
+	public void realizarReserva(Viaje reserva) {
+		viajes2.add(reserva);
+	}
 	
 	public Integer getDNI() {
 		return DNI;

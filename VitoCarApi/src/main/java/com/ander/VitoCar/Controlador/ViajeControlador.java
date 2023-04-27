@@ -84,6 +84,31 @@ public class ViajeControlador {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(viaje.getIdViaje()).toUri();
 		return ResponseEntity.created(location).body(viajeGuardado);
 	}
+	// add a reserva to a viaje
+	@PostMapping("/reservar/{dni}/{idViaje}")
+    public ResponseEntity<Object> realizarReserva (@PathVariable int dni, @PathVariable int idViaje) {               
+           
+            Optional<User> userOptional2 = userRepositorio.findById(dni);
+            if(!userOptional2.isPresent()) {
+                    return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+            }
+            User userEntity = userOptional2.get();
+           
+            Optional<Viaje> viajeOptional2 = viajeRepositorio.findById(idViaje);
+            if(!viajeOptional2.isPresent()) {
+                    return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+            }
+            Viaje viajeEntity = viajeOptional2.get();
+           
+            userEntity.getViajes2().add(viajeEntity);
+            viajeEntity.getUsuarios2().add(userEntity);
+           
+            userRepositorio.save(userEntity);
+            //viajeRepositorio.save(viajeEntity);
+           
+            return ResponseEntity.ok(viajeRepositorio.save(viajeEntity));
+    }
+	// anular a reserva
 	@DeleteMapping("/anular")
 	public ResponseEntity<Void> anularReserva(@RequestParam (name="dni") Integer dni, @RequestParam (name="idViaje") Integer idViaje){
 		Optional<User> usuarioOpcional = userRepositorio.findById(dni);

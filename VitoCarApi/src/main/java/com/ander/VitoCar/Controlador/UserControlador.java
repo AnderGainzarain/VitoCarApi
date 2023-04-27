@@ -24,12 +24,12 @@ public class UserControlador {
 		UserRepositorio userRepositorio;
 		@Autowired
 		ViajeRepositorio viajeRepositorio;
-		
+		// Get all users
 		@GetMapping("")
 		public ResponseEntity<List<User>> obtenerUsuarios(){
 				return new ResponseEntity<>(userRepositorio.findAll(),HttpStatus.OK);
 		}
-		
+		// Get a specific user via their dni
 		@GetMapping("/{dni}")
 		public ResponseEntity<Object> obtenerUser(@PathVariable int dni){
 			Optional<User> usuarioOpcional = userRepositorio.findById(dni);
@@ -38,7 +38,7 @@ public class UserControlador {
 			}
 			return new ResponseEntity<>(userRepositorio.findById(dni),HttpStatus.OK);
 		}
-		
+		// Get the viajes an user is offering
 		@GetMapping("/{dni}/viajes")
 		public ResponseEntity<List<Viaje>> viajesUsuarioPorDni(@PathVariable int dni){
 			Optional<User> usuarioOpcional = userRepositorio.findById(dni);
