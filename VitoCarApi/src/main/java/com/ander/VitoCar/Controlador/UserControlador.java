@@ -38,6 +38,15 @@ public class UserControlador {
 			}
 			return new ResponseEntity<>(userRepositorio.findById(dni),HttpStatus.OK);
 		}
+		// Get a specific user via their mail
+		@GetMapping("/mail/{mail}")
+		public ResponseEntity<Object> obtenerUserMail(@PathVariable String mail){
+			Optional<User> usuarioOpcional = userRepositorio.findByMail(mail);
+			if(!usuarioOpcional.isPresent()) {
+				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(userRepositorio.findByMail(mail),HttpStatus.OK);
+		}
 		// Get the viajes an user is offering
 		@GetMapping("/{dni}/viajes")
 		public ResponseEntity<List<Viaje>> viajesUsuarioPorDni(@PathVariable int dni){
