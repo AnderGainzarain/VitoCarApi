@@ -104,13 +104,12 @@ public class ViajeControlador {
             viajeEntity.getUsuarios2().add(userEntity);
            
             userRepositorio.save(userEntity);
-            //viajeRepositorio.save(viajeEntity);
            
             return ResponseEntity.ok(viajeRepositorio.save(viajeEntity));
     }
 	// anular a reserva
-	@DeleteMapping("/anular")
-	public ResponseEntity<Void> anularReserva(@RequestParam (name="dni") Integer dni, @RequestParam (name="idViaje") Integer idViaje){
+	@DeleteMapping("/anularReserva/{dni}/{idViaje}")
+	public ResponseEntity<Void> anularReserva(@PathVariable int dni, @PathVariable int idViaje){
 		Optional<User> usuarioOpcional = userRepositorio.findById(dni);
 		Optional<Viaje> viajeOpcional = viajeRepositorio.findById(idViaje);
 		if (!usuarioOpcional.isPresent() || !(viajeOpcional.isPresent())) {
@@ -120,6 +119,7 @@ public class ViajeControlador {
 		usuario.anularReserva(idViaje);
 		Viaje viaje = viajeOpcional.get();
 		viaje.anularReserva(dni);
+		userRepositorio.save(usuario);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 }
