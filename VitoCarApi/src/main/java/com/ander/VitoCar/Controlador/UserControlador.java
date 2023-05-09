@@ -56,4 +56,13 @@ public class UserControlador {
 			}
 			return new ResponseEntity<>(usuarioOpcional.get().getViajes(),HttpStatus.OK);
 		}
+		// return all the pasajeros from a viaje
+		@GetMapping("/{idViaje}/pasajeros")
+		public ResponseEntity<List<User>>obtenerViajesPasajero(@PathVariable Integer idViaje){
+			Optional<Viaje> viajeOpcional = viajeRepositorio.findById(idViaje);
+			if(!viajeOpcional.isPresent()) {
+				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(viajeOpcional.get().getUsuarios2(),HttpStatus.OK);
+		}
 }

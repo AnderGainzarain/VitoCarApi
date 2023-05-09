@@ -37,7 +37,7 @@ public class Viaje {
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="conductorId", referencedColumnName="DNI")
 	@JsonProperty(access=Access.WRITE_ONLY)
-	//@JsonIgnore
+	@JsonIgnore
 	private User conductor;
 	
 	@ManyToMany()
