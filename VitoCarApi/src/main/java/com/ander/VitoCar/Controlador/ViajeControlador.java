@@ -32,18 +32,7 @@ public class ViajeControlador {
 	UserRepositorio userRepositorio;
 	@Autowired
 	ViajeRepositorio viajeRepositorio;
-	
-	// Returns all the data from the driver
-	@GetMapping("/{id}")
-	public ResponseEntity<User>getViaje(@PathVariable Integer id){
-		Optional<Viaje> viajeOpcional = viajeRepositorio.findById(id);
-		if(!viajeOpcional.isPresent()) {
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		}
 		
-		return new ResponseEntity<>(viajeOpcional.get().getConductor(),HttpStatus.OK);
-	}
-	
 	// Returns all the viajes from the database
 	@GetMapping("")
 		public ResponseEntity<List<Viaje>> obtenerViajes(){
