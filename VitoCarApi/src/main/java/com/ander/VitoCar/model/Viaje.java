@@ -20,7 +20,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
-@Table(name="Viajes")
+@Table(name="viaje")
 public class Viaje {
 
 	// declare the class atributes
@@ -157,6 +157,9 @@ public class Viaje {
 				usuarios2.remove(i);
 			}
 		}
+	}
+	public int getNumPasajeros() {
+		return usuarios2.size();
 	}
 
 	public Viaje() {

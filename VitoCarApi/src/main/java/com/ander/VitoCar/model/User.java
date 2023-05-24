@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -32,6 +33,7 @@ public class User {
 
 	@ManyToMany()
 	@JsonBackReference
+	//@JsonManagedReference
 	@JoinTable(name="reserva", joinColumns = @JoinColumn(name="userId", referencedColumnName="DNI"),
 			inverseJoinColumns= @JoinColumn(name="viajeId", referencedColumnName="idViaje"))
 	

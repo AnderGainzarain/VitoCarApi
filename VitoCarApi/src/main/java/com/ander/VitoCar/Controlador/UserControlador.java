@@ -27,11 +27,11 @@ public class UserControlador {
 		@Autowired
 		ViajeRepositorio viajeRepositorio;
 		// Get all users
-		@GetMapping("")
+		/*@GetMapping("")
 		public ResponseEntity<List<User>> obtenerUsuarios(){
 				return new ResponseEntity<>(userRepositorio.findAll(),HttpStatus.OK);
-		}
-		// Returns all the viajes whete the user is a pasajero
+		}*/
+		// Returns the dni and mail of the driver
 		@GetMapping("/{idViaje}/conductor")
 		public ResponseEntity<List<String>>getDriverData(@PathVariable Integer idViaje){
 			Optional<Viaje> viajeOpcional = viajeRepositorio.findById(idViaje);

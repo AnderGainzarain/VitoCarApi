@@ -34,10 +34,10 @@ public class ViajeControlador {
 	ViajeRepositorio viajeRepositorio;
 		
 	// Returns all the viajes from the database
-	@GetMapping("")
+	/*@GetMapping("")
 		public ResponseEntity<List<Viaje>> obtenerViajes(){
 			return new ResponseEntity<>(viajeRepositorio.findAll(),HttpStatus.OK);
-	}
+	}*/
 	
 	// Deletes the viaje with the matching id
 	@DeleteMapping("/{id}")
@@ -47,20 +47,35 @@ public class ViajeControlador {
 	}
 	
 	// Returns the viajes between two dates
-	@GetMapping("/fecha")
+	/*@GetMapping("/fecha")
 	public ResponseEntity<List<Viaje>> obtenerFechas(
 			@RequestParam(name="from") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime from,
 			@RequestParam(name="to") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime to){
 		return ResponseEntity.ok(viajeRepositorio.findBetween(from,to));
-	}
+	}*/
 	// Returns the viajes with a specific origen, destino and fechaSalida
 	@GetMapping("/viajeConcreto")
 	public ResponseEntity<List<Viaje>> obtenerViajeConcreto(
 			@RequestParam(name="origen") String origen,
 			@RequestParam(name="destino") String destino,
-			@RequestParam(name="fecha") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime fecha){
-		return ResponseEntity.ok(viajeRepositorio.findViaje(origen,destino,fecha));
+			@RequestParam(name="fecha") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime fecha,
+			@RequestParam(name="DNI") Integer DNI){
+		List<Viaje> viajes = viajeRepositorio.findViaje(origen,destino,fecha);
+		viajes = viajes.stream().filter(v-> v.getNumPasajeros()<3).toList();
+		if(DNI!=0) {
+			viajes = viajes.stream().filter(v-> !v.getConductor().getDNI().equals(DNI)).toList();
+		}
+		return ResponseEntity.ok(viajes);
 	}
+	// Returns the viajes with a specific origen, destino and fechaSalida excluding the ones of a specified user
+	/*@GetMapping("/viajeConcretoConductor")
+	public ResponseEntity<List<Viaje>> obtenerViajeConcretoConductor(
+			@RequestParam(name="origen") String origen,
+			@RequestParam(name="destino") String destino,
+			@RequestParam(name="fecha") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime fecha,
+			@RequestParam(name="dni") Integer dni){
+		return ResponseEntity.ok(viajeRepositorio.findViajeConductor(origen,destino,fecha,dni));
+	}*/
 	// Returns all the viajes whete the user is a pasajero
 	@GetMapping("/{id}/pasajero")
 	public ResponseEntity<List<Viaje>>obtenerViajesPasajero(@PathVariable Integer id){
@@ -100,10 +115,10 @@ public class ViajeControlador {
             }
             Viaje viajeEntity = viajeOptional2.get();
            
-            userEntity.getViajes2().add(viajeEntity);
+            //userEntity.getViajes2().add(viajeEntity);
             viajeEntity.getUsuarios2().add(userEntity);
            
-            userRepositorio.save(userEntity);
+            //userRepositorio.save(userEntity);
            
             return ResponseEntity.ok(viajeRepositorio.save(viajeEntity));
     }
