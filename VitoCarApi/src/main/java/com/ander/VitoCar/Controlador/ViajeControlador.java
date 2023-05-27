@@ -61,9 +61,18 @@ public class ViajeControlador {
 			@RequestParam(name="fecha") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime fecha,
 			@RequestParam(name="DNI") Integer DNI){
 		List<Viaje> viajes = viajeRepositorio.findViaje(origen,destino,fecha);
-		viajes = viajes.stream().filter(v-> v.getNumPasajeros()<3).toList();
+		// Delete the viajes with 3 reservas
+		viajes = viajes.stream().filter(v-> v.getNumPasajeros()!=3).toList();
+		
 		if(DNI!=0) {
+			// Delete the vuajes the user has posted
 			viajes = viajes.stream().filter(v-> !v.getConductor().getDNI().equals(DNI)).toList();
+			// Delete the viajes the user has reserved
+			Optional<User> user = userRepositorio.findById(DNI);
+			List<Viaje> reservas = user.get().getViajes2();
+			for(Viaje reserva:reservas) {
+				viajes = viajes.stream().filter(v->v.getIdViaje()!=reserva.getIdViaje()).toList();
+			}
 		}
 		return ResponseEntity.ok(viajes);
 	}

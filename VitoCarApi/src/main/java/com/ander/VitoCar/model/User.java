@@ -149,6 +149,11 @@ public class User {
 			}
 		}
 	}	
+	/*public List<Integer> getIdReservas() {
+		List<Integer> ids = new List<>();
+		viajes2.forEach(v->ids.add(v.getIdViaje()));
+		return ids;
+	}*/
 	public User() {
 		super();
 	}
