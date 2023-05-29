@@ -26,11 +26,6 @@ public class UserControlador {
 		UserRepositorio userRepositorio;
 		@Autowired
 		ViajeRepositorio viajeRepositorio;
-		// Get all users
-		/*@GetMapping("")
-		public ResponseEntity<List<User>> obtenerUsuarios(){
-				return new ResponseEntity<>(userRepositorio.findAll(),HttpStatus.OK);
-		}*/
 		// Returns the dni and mail of the driver
 		@GetMapping("/{idViaje}/conductor")
 		public ResponseEntity<List<String>>getDriverData(@PathVariable Integer idViaje){
@@ -43,7 +38,7 @@ public class UserControlador {
 			data.add(viajeOpcional.get().getConductor().getMail());
 			return new ResponseEntity<>(data,HttpStatus.ACCEPTED);
 		}
-		// Get a specific user via their dni
+		/*// Get a specific user via their dni
 		@GetMapping("/{dni}")
 		public ResponseEntity<Object> obtenerUser(@PathVariable int dni){
 			Optional<User> usuarioOpcional = userRepositorio.findById(dni);
@@ -51,7 +46,7 @@ public class UserControlador {
 				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>(userRepositorio.findById(dni),HttpStatus.OK);
-		}
+		}*/
 		// Get a specific user via their mail
 		@GetMapping("/mail/{mail}")
 		public ResponseEntity<Object> obtenerUserMail(@PathVariable String mail){
